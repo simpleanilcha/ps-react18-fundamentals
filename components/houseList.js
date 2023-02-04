@@ -1,3 +1,4 @@
+import { useState } from "react";
 import HouseRow from "./houseRow";
 
 const houseArray = [
@@ -16,8 +17,24 @@ const houseArray = [
 ];
 
 const HouseList = () => {
+  const [houses, setHouses] = useState(houseArray)
+  // const [counter, setCounter] = useState(0)
+  // const increment = () => setCounter(counter + 1)
+
+  const addHouse = () => {
+    setHouses([
+      ...houses,
+      {
+        id: 3,
+        address: '32 Valley Way, New York',
+        country: 'USA',
+        price: 1000000,
+      }
+    ])
+  }
   return (
     <>
+      {/* {counter} */}
       <div className="row mb-2">
         <h5 className="themeFontColor text-center">
           Houses currently on the market
@@ -32,9 +49,15 @@ const HouseList = () => {
           </tr>
         </thead>
         <tbody>
-          {houseArray.map(h => <HouseRow key={h.id} house={h} /> )}
+          {houses.map(h => <HouseRow key={h.id} house={h} /> )}
         </tbody>
       </table>
+      <button className="btn btn-primary" onClick={addHouse}>
+        Add
+      </button>
+      {/* <button className="btn btn-primary" onClick={increment}>
+        count
+      </button> */}
     </>
   )
 }
