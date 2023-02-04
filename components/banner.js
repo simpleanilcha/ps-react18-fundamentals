@@ -8,7 +8,7 @@ const subtitleStyle = {
   color: 'coral'
 }
 
-const Banner = () => {
+const Banner = (props) => {
   return (
     <header className='row mb-4'>
       <div className='col-5'>
@@ -21,7 +21,8 @@ const Banner = () => {
       </div>
       {/* {fontStyle: 'italic'} */}
       <div className='col-7 mt-5' style={subtitleStyle}>
-        <p>Providing houses all over the world</p>
+        {/* <p>Providing houses all over the world</p> */}
+        <p>{props.headerText}</p>
       </div>
     </header>
   )
