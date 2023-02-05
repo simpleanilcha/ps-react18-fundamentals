@@ -3,7 +3,7 @@ import useHouses from "@/hooks/useHouses";
 import HouseRow from "./houseRow";
 import LoadingIndicator from "./loadingIndicator";
 
-const HouseList = ({ selectHouse }) => {
+const HouseList = () => {
   const { houses, setHouses, loadingState } = useHouses()
 
   if (loadingState !== loadingStatus.loaded) return <LoadingIndicator loadingState={loadingState} />
@@ -35,7 +35,7 @@ const HouseList = ({ selectHouse }) => {
           </tr>
         </thead>
         <tbody>
-          {houses.map(h => <HouseRow key={h.id} house={h} selectHouse={selectHouse} /> )}
+          {houses.map(h => <HouseRow key={h.id} house={h} /> )}
         </tbody>
       </table>
       <button className="btn btn-primary" onClick={addHouse}>

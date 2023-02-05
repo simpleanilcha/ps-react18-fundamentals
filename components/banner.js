@@ -1,5 +1,8 @@
+import navValues from '@/helpers/navValues'
 import Image from 'next/image'
+import { useContext } from 'react'
 import logoImg from '../public/GloboLogo.png'
+import { navigationContext } from './app'
 import { logo } from './banner.module.css'
 
 const subtitleStyle = {
@@ -9,6 +12,7 @@ const subtitleStyle = {
 }
 
 const Banner = ({children}) => {
+  const { navigate } = useContext(navigationContext)
   return (
     <header className='row mb-4'>
       <div className='col-5'>
@@ -17,6 +21,7 @@ const Banner = ({children}) => {
           src={logoImg}
           alt="logo"
           className={logo}
+          onClick={() => navigate(navValues.home)}
         />
       </div>
       <div className='col-7 mt-5' style={subtitleStyle}>
