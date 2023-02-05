@@ -1,14 +1,20 @@
+import { useState } from "react";
 import Banner from "./banner";
+import House from "./house";
 import HouseList from "./houseList";
 
 const App = () => {
-  const jsx = <div>Hello React and Next js</div>
+  const [selectedHouse, setSelectedHouse] = useState()
   return (
     <>
       <Banner>
         <p> Providing houses all over the <span>world</span></p>
       </Banner>
-      <HouseList />
+      {selectedHouse ? (
+        <House house={selectedHouse} />
+      ) : (
+        <HouseList selectHouse={setSelectedHouse} />
+      )}
     </>
   )
 }

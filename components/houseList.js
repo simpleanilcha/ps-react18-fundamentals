@@ -1,25 +1,8 @@
 import { useEffect, useState } from "react";
 import HouseRow from "./houseRow";
 
-// const houseArray = [
-//   {
-//     id: 1,
-//     address: "12 Valley of Kings, Geneva",
-//     country: "Switzerland",
-//     price: 900000,
-//   },
-//   {
-//     id: 2,
-//     address: "89 Road of Forks, Bern",
-//     country: "Switzerland",
-//     price: 500000,
-//   },
-// ];
-
-const HouseList = () => {
+const HouseList = ({ selectHouse }) => {
   const [houses, setHouses] = useState([])
-  // const [counter, setCounter] = useState(0)
-  // const increment = () => setCounter(counter + 1)
 
   useEffect(() => {
     const fetchHouses = async () => {
@@ -28,7 +11,7 @@ const HouseList = () => {
       setHouses(houses)
     }
     fetchHouses();
-  })
+  }, [])
 
   const addHouse = () => {
     setHouses([
@@ -43,7 +26,6 @@ const HouseList = () => {
   }
   return (
     <>
-      {/* {counter} */}
       <div className="row mb-2">
         <h5 className="themeFontColor text-center">
           Houses currently on the market
@@ -58,15 +40,12 @@ const HouseList = () => {
           </tr>
         </thead>
         <tbody>
-          {houses.map(h => <HouseRow key={h.id} house={h} /> )}
+          {houses.map(h => <HouseRow key={h.id} house={h} selectHouse={selectHouse} /> )}
         </tbody>
       </table>
       <button className="btn btn-primary" onClick={addHouse}>
         Add
       </button>
-      {/* <button className="btn btn-primary" onClick={increment}>
-        count
-      </button> */}
     </>
   )
 }
