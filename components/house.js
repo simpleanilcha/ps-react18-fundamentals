@@ -1,5 +1,6 @@
 import loadingStatus from "@/helpers/loadingStatus";
 import useBids from "@/hooks/useBids";
+import Image from "next/image";
 import { useContext } from "react";
 import currencyFormatter from "../helpers/currencyFormatter";
 import defaultPhoto from "../helpers/defaultPhoto";
@@ -14,18 +15,28 @@ const House = () => {
   
   if (loadingState !== loadingStatus.loaded)
     return <LoadingIndicator loadingState={loadingState} />;
+  
+  const houseImg = house.photo ? `/houseImages/${house.photo}.jpeg` : defaultPhoto
+  console.log(houseImg)
 
   return (
     <div className="row">
       <div className="col-6">
         <div className="row">
-          <img
+          <Image
+            className="img-fluid"
+            src={houseImg}
+            alt="House pic"
+            width="500"
+            height='100'
+          />
+          {/* <img
             className="img-fluid"
             src={
               house.photo ? `./houseImages/${house.photo}.jpeg` : defaultPhoto
             }
             alt="House pic"
-          />
+          /> */}
         </div>
       </div>
       <div className="col-6">
