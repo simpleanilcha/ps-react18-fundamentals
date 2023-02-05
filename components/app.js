@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Banner from "./banner";
 import House from "./house";
 import HouseList from "./houseList";
 
 const App = () => {
   const [selectedHouse, setSelectedHouse] = useState()
+
+  const setSelectedHouseWrapper = useCallback((house) => {
+    setSelectedHouse(house)
+  }, [])
+
   return (
     <>
       <Banner>
@@ -13,7 +18,7 @@ const App = () => {
       {selectedHouse ? (
         <House house={selectedHouse} />
       ) : (
-        <HouseList selectHouse={setSelectedHouse} />
+        <HouseList selectHouse={setSelectedHouseWrapper} />
       )}
     </>
   )

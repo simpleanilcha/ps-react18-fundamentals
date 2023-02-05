@@ -1,17 +1,12 @@
-import { useEffect, useState } from "react";
+import loadingStatus from "@/helpers/loadingStatus";
+import useHouses from "@/hooks/useHouses";
 import HouseRow from "./houseRow";
+import LoadingIndicator from "./loadingIndicator";
 
 const HouseList = ({ selectHouse }) => {
-  const [houses, setHouses] = useState([])
+  const { houses, setHouses, loadingState } = useHouses()
 
-  useEffect(() => {
-    const fetchHouses = async () => {
-      const response = await fetch('/api/houses');
-      const houses = await response.json()
-      setHouses(houses)
-    }
-    fetchHouses();
-  }, [])
+  if (loadingState !== loadingStatus.loaded) return <LoadingIndicator loadingState={loadingState} />
 
   const addHouse = () => {
     setHouses([
