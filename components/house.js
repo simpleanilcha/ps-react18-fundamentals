@@ -1,10 +1,20 @@
+import loadingStatus from "@/helpers/loadingStatus";
+import useBids from "@/hooks/useBids";
 import { useContext } from "react";
 import currencyFormatter from "../helpers/currencyFormatter";
 import defaultPhoto from "../helpers/defaultPhoto";
+import AddBid from "./addBid";
 import { navigationContext } from "./app";
+import BidList from "./bidList";
+import LoadingIndicator from "./loadingIndicator";
 
 const House = () => {
   const { param: house } = useContext(navigationContext)
+  const { bids, loadingState, addBid } = useBids(house.id)
+  
+  if (loadingState !== loadingStatus.loaded)
+    return <LoadingIndicator loadingState={loadingState} />;
+
   return (
     <div className="row">
       <div className="col-6">
@@ -34,6 +44,8 @@ const House = () => {
           <div className="col-12 mt-3">{house.description}</div>
         </div>
       </div>
+      <BidList bids={bids} />
+      <AddBid house={house} addBid={addBid} />
     </div>
   );
 };
